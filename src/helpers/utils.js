@@ -6,7 +6,7 @@ for(let property in params){
     let encodedValue = encodeURIComponent(params[property]); //akash 123 =akash%20123
 
 
-    formBody(encodedKey + '=' + encodedValue);
+    formBody.push(encodedKey + '=' + encodedValue);
 }
 return formBody.join('&'); //'username=akash&password=123213
 
