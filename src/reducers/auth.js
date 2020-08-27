@@ -1,4 +1,4 @@
-import { Login_START, LOGIN_FAILED } from "../actions/actionTypes";
+import { Login_START, LOGIN_SUCCESS,LOGIN_FAILED } from "../actions/actionTypes";
 
 const initialAuthState={
     user: {},
@@ -9,7 +9,7 @@ const initialAuthState={
 }
 
 
-export function auth(state= initialAuthState, action){
+export default function auth(state= initialAuthState, action){
        switch(action.type){
            case Login_START:
            return{
