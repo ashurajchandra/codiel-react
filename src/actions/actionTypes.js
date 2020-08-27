@@ -12,3 +12,6 @@ export const LOG_OUT = 'LOG_OUT';
 export const SIGNUP_START = 'SIGNUP_START';
 export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS';
 export const SIGNUP_FAILED = 'SIGNUP_FAILED';
+
+// to remove the error message after coming again
+export const CLEAR_AUTH_STATE = 'CLEAR_AUTH_STATE';
