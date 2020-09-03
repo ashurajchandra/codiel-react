@@ -6,6 +6,7 @@ import App from './components/App';
 import { configureStore } from './store';
 
 
+
  const store = configureStore();
  
 ReactDOM.render(

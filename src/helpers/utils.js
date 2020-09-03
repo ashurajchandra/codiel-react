@@ -11,3 +11,8 @@ for(let property in params){
 return formBody.join('&'); //'username=akash&password=123213
 
 }
+
+export function getAuthTokenFromLocalStorage(){
+
+    return localStorage.getItem('token');
+}

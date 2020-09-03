@@ -8,9 +8,12 @@ import {
   SIGNUP_FAILED,
   SIGNUP_SUCCESS,
   CLEAR_AUTH_STATE,
+  EDIT_USER_SUCCESSFUL,
+  EDIT_USER_FAILED,
+ 
 } from './actionTypes';
 import { APIUrls } from '../helpers/urls';
-import { getFormBody } from '../helpers/utils';
+import { getFormBody,getAuthTokenFromLocalStorage } from '../helpers/utils';
 
 export function startLogin() {
   return {
@@ -126,3 +129,60 @@ export function clearAuthState(){
   
   }
 }
+
+export function userEditSuccessful(user){
+  return{
+    type:EDIT_USER_SUCCESSFUL,
+    user,
+  
+  }
+}
+
+
+export function userEditFailed(error){
+  return{
+    type:EDIT_USER_FAILED,
+    error,
+  
+  }
+}
+
+
+export function editUser(name, password, confirmPassword, userId) {
+  return (dispatch) => {
+    const url = APIUrls.editProfile();
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        Authorization: `Bearer ${getAuthTokenFromLocalStorage()}`,
+      },
+      body: getFormBody({
+        name,
+        password,
+        confirm_password: confirmPassword,
+        id: userId,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        // console.log('data', data);
+       // console.log('signup',data);
+        if (data.success) {
+          // do something
+          console.log('user Profile updated',data);
+          dispatch(userEditSuccessful(data.data.user));
+          if(data.data.token){
+            localStorage.setItem('token', data.data.token)
+          }
+            return;
+            
+        }
+     
+       
+        
+        dispatch(userEditFailed(data.message));
+      });
+  };
+}
+
